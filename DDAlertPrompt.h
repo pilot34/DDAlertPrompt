@@ -37,6 +37,7 @@
 
 @property(nonatomic, retain, readonly) UITextField *plainTextField;
 @property(nonatomic, retain, readonly) UITextField *secretTextField;
+@property(nonatomic) BOOL showSecretTextField;
 
 - (id)initWithTitle:(NSString *)title delegate:(id /*<UIAlertViewDelegate>*/)delegate cancelButtonTitle:(NSString *)cancelButtonTitle otherButtonTitle:(NSString *)otherButtonTitles;
 

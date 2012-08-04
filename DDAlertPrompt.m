@@ -41,6 +41,7 @@
 @synthesize tableView = tableView_;
 @synthesize plainTextField = plainTextField_;
 @synthesize secretTextField = secretTextField_;
+@synthesize showSecretTextField = showSecretTextField_;
 
 /*
 -(BOOL)_needsKeyboard {
@@ -86,13 +87,27 @@
 - (void)layoutSubviews {
 	// We assume keyboard is on.
 	if ([[UIDevice currentDevice] isGeneratingDeviceOrientationNotifications]) {
-		if (UIInterfaceOrientationIsPortrait([[UIApplication sharedApplication] statusBarOrientation])) {
-			self.center = CGPointMake(160.0f, (460.0f - 216.0f)/2 + 12.0f);
-			self.tableView.frame = CGRectMake(12.0f, 51.0f, 260.0f, 56.0f);		
-		} else {
-			self.center = CGPointMake(240.0f, (300.0f - 162.0f)/2 + 12.0f);
-			self.tableView.frame = CGRectMake(12.0f, 35.0f, 260.0f, 56.0f);		
-		}
+        
+        if (self.showSecretTextField)
+        {
+            if (UIInterfaceOrientationIsPortrait([[UIApplication sharedApplication] statusBarOrientation])) {
+                self.center = CGPointMake(160.0f, (460.0f - 216.0f)/2 + 12.0f);
+                self.tableView.frame = CGRectMake(12.0f, 51.0f, 260.0f, 56.0f);		
+            } else {
+                self.center = CGPointMake(240.0f, (300.0f - 162.0f)/2 + 12.0f);
+                self.tableView.frame = CGRectMake(12.0f, 35.0f, 260.0f, 56.0f);		
+            }
+        }
+        else
+        {
+            if (UIInterfaceOrientationIsPortrait([[UIApplication sharedApplication] statusBarOrientation])) {
+                self.center = CGPointMake(160.0f, (460.0f - 216.0f)/2 + 12.0f);
+                self.tableView.frame = CGRectMake(12.0f, 65.0f, 260.0f, 28.0f);
+            } else {
+                self.center = CGPointMake(240.0f, (300.0f - 162.0f)/2 + 12.0f);
+                self.tableView.frame = CGRectMake(12.0f, 49.0f, 260.0f, 28.0f);
+            }
+        }
 	}
 }
 
@@ -132,7 +147,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-	return 2;
+	return self.showSecretTextField ? 2 : 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
